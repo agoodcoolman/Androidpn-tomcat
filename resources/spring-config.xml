@@ -139,6 +139,6 @@
 
 	<bean id="getSessionConfig" factory-bean="ioAcceptor"
 		factory-method="getSessionConfig">
-		<property name="readerIdleTime" value="30"></property>
+		<property name="readerIdleTime" value="60"></property>
 	</bean>
 </beans>
