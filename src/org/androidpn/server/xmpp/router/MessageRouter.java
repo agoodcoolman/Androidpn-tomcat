@@ -24,6 +24,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import org.androidpn.server.message.MessageConfirmHandler;
 import org.androidpn.server.message.MessageHandler;
+import org.androidpn.server.message.MessageVideoHandler;
 import org.androidpn.server.message.SingleMessageHandler;
 import org.androidpn.server.xmpp.handler.IQHandler;
 import org.androidpn.server.xmpp.session.ClientSession;
@@ -60,6 +61,7 @@ public class MessageRouter {
     	 sessionManager = SessionManager.getInstance();
     	 messageHandlers.add(new SingleMessageHandler());
     	 messageHandlers.add(new MessageConfirmHandler());
+    	 messageHandlers.add(new MessageVideoHandler());
     }
 
     /**
@@ -72,8 +74,8 @@ public class MessageRouter {
             throw new NullPointerException();
         }
     	ClientSession session = sessionManager.getSession(packet.getFrom());
-    	if (session != null && session.getStatus() == Session.STATUS_AUTHENTICATED /*|| 
-    			("jabber:message:message".equals(packet.getElement().getNamespace().toString()))*/   ) {
+    	if (session != null && session.getStatus() == Session.STATUS_AUTHENTICATED || 
+    			("jabber:message:message".equals(packet.getElement().getNamespace().toString()))   ) {
     		handle(packet);
     	} else {
     		// FIXME 这里都是没有发送出去的,那个 session.process 就是处理失败,然后加个失败的回复,返回给请求的设备

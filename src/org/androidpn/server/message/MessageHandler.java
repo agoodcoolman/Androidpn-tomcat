@@ -1,6 +1,7 @@
 package org.androidpn.server.message;
 
 import org.androidpn.server.service.exception.UnauthorizedException;
+import org.androidpn.server.xmpp.router.PacketDeliverer;
 import org.androidpn.server.xmpp.session.ClientSession;
 import org.androidpn.server.xmpp.session.Session;
 import org.androidpn.server.xmpp.session.SessionManager;
@@ -47,7 +48,10 @@ public abstract class MessageHandler {
     		
     		if (resultMessage.getError() != null) {
     			// 如果出现错误,将错误信息返回给发送者
+    			
     			messageManager.sendMessageIM(message.getTo().getNode(), message);
+    		} else {
+    			PacketDeliverer.deliver(resultMessage);
     		}
     	}
     }
