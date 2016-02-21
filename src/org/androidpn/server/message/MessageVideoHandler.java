@@ -42,11 +42,11 @@ public class MessageVideoHandler extends MessageHandler {
 
 		String playUri = uploadUri.attribute("uri").getText();
 		createCopy.deleteExtension("uploadUri", NAME_SPACE);
-		JID from = packet.getFrom();
+		/*JID from = packet.getFrom();
 		JID to = packet.getTo();
 		
 		createCopy.setTo(from);
-		createCopy.setFrom(to);
+		createCopy.setFrom(to);*/
 		
 		createCopy.addChildElement("playUri", NAME_SPACE);
 		createCopy.getChildElement("playUri", NAME_SPACE).addAttribute("uri", playUri);

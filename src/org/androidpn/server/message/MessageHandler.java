@@ -48,8 +48,7 @@ public abstract class MessageHandler {
     		
     		if (resultMessage.getError() != null) {
     			// 如果出现错误,将错误信息返回给发送者
-    			
-    			messageManager.sendMessageIM(message.getTo().getNode(), message);
+    			messageManager.sendMessageIM(message.getFrom().getNode(), message);
     		} else {
     			PacketDeliverer.deliver(resultMessage);
     		}

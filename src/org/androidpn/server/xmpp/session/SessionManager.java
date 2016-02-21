@@ -67,6 +67,7 @@ public class SessionManager {
     public static SessionManager getInstance() {
         if (instance == null) {
             synchronized (SessionManager.class) {
+            	if (instance == null) 
                 instance = new SessionManager();
             }
         }
